@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import model.entities.Account;
+import model.exceptions.BusinessException;
 
 public class Program {
 
@@ -29,11 +30,14 @@ public class Program {
 		System.out.print("Enter amount for withdraw: ");
 		double amount = sc.nextDouble();
 		
-		acc.withdraw(amount);
-				
-		
+		try {
+			acc.withdraw(amount);
+			System.out.printf("New balance: " + String.format("%.2f", acc.getBalance()));
+		}
+		catch (BusinessException e) {
+			System.out.print(e.getMessage());
+		}
 		
 		sc.close();
 	}
-
 }
